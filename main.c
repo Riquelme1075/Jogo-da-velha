@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-//Função que imprime a matriz tabuleiro
+// Função que imprime a matriz tabuleiro
 void imprimir_tabuleiro(char tabuleiro[3][3])
 {
     int i, j;
@@ -13,7 +13,7 @@ void imprimir_tabuleiro(char tabuleiro[3][3])
     printf(" 2 ");
     printf(" 3 \n");
 
-    //Imprimindo as linhas e colunas
+    // Imprimindo as linhas e colunas
     for (i = 0; i < 3; i++)
     {
         if (i == 0)
@@ -42,10 +42,10 @@ int marcar(char tabuleiro[3][3], int jogador_atual, char posicao[5])
     char simbolo;
     char linha, coluna;
 
-    //Recebendo linha, a, b ou c
+    // Recebendo linha, a, b ou c
     linha = tolower(posicao[0]);
 
-    //Recebendo coluna, 1, 2, 3
+    // Recebendo coluna, 1, 2, 3
     coluna = tolower(posicao[1]);
 
     // Dando o simbolo ao jogador que fez a jogada.
@@ -70,7 +70,9 @@ int marcar(char tabuleiro[3][3], int jogador_atual, char posicao[5])
         else if (coluna == '3' && tabuleiro[0][2] == ' ')
         {
             tabuleiro[0][2] = simbolo;
-        }else{
+        }
+        else
+        {
             return 0;
         }
     }
@@ -87,7 +89,9 @@ int marcar(char tabuleiro[3][3], int jogador_atual, char posicao[5])
         else if (coluna == '3' && tabuleiro[1][2] == ' ')
         {
             tabuleiro[1][2] = simbolo;
-        }else{
+        }
+        else
+        {
             return 0;
         }
     }
@@ -104,10 +108,14 @@ int marcar(char tabuleiro[3][3], int jogador_atual, char posicao[5])
         else if (coluna == '3' && tabuleiro[2][2] == ' ')
         {
             tabuleiro[2][2] = simbolo;
-        }else{
+        }
+        else
+        {
             return 0;
         }
-    }else{
+    }
+    else
+    {
         return 0;
     }
     imprimir_tabuleiro(tabuleiro);
@@ -119,7 +127,7 @@ void verificar_vencedor(char tabuleiro[3][3], int jogador_atual, int *venceu)
     int simbolo, i;
     *venceu = 0;
 
-    //Determinando o simbolo do jogador que está jogando
+    // Determinando o simbolo do jogador que está jogando
     if (jogador_atual == 1)
     {
         simbolo = 'x';
@@ -132,25 +140,27 @@ void verificar_vencedor(char tabuleiro[3][3], int jogador_atual, int *venceu)
     // Verificando
     for (i = 0; i < 3; i++)
     {
-        //Colunas
+        // Colunas
         if (tabuleiro[0][i] == simbolo && tabuleiro[1][i] == simbolo && tabuleiro[2][i] == simbolo && *venceu == 0)
         {
             *venceu = 1;
         }
-        
-        //Linhas
+
+        // Linhas
         if (tabuleiro[i][0] == simbolo && tabuleiro[i][1] == simbolo && tabuleiro[i][2] == simbolo && *venceu == 0)
         {
             *venceu = 1;
         }
     }
-    //em formato de \ ou /
-    if(tabuleiro[0][0] == simbolo && tabuleiro[1][1] == simbolo && tabuleiro[2][2] == simbolo && *venceu == 0){
-        *venceu = 1;
-    }else if(tabuleiro[0][2] == simbolo && tabuleiro[1][1] == simbolo && tabuleiro[2][0] == simbolo && *venceu == 0){
+    // em formato de \ ou /
+    if (tabuleiro[0][0] == simbolo && tabuleiro[1][1] == simbolo && tabuleiro[2][2] == simbolo && *venceu == 0)
+    {
         *venceu = 1;
     }
-
+    else if (tabuleiro[0][2] == simbolo && tabuleiro[1][1] == simbolo && tabuleiro[2][0] == simbolo && *venceu == 0)
+    {
+        *venceu = 1;
+    }
 }
 
 int main()
@@ -193,21 +203,25 @@ int main()
             printf(" %s:", jogador_1);
             fflush(stdin);
             scanf("%[^\n]", posicao);
-            //Se a jogada foi valida retorna 1
+            // Se a jogada foi valida retorna 1
             jogada = marcar(tabuleiro, jogador_atual, posicao);
             verificar_vencedor(tabuleiro, jogador_atual, &venceu);
-            if(venceu == 1){
-            printf("PAREBENS!\n");
-            printf("%s venceu a partida.", jogador_1);
-            terminar = 1;
-            }else if (jogada == 0) //Jogada foi falsa, invalida
+            if (venceu == 1)
+            {
+                printf("PAREBENS!\n");
+                printf("%s venceu a partida.", jogador_1);
+                terminar = 1;
+            }
+            else if (jogada == 0) // Jogada foi falsa, invalida
             {
                 system("cls || clean");
                 imprimir_tabuleiro(tabuleiro);
                 printf("\nJogada invalida!");
                 jogador_atual = 1;
-            }else{
-            jogador_atual = 2; // Troca para o jogador 2.
+            }
+            else
+            {
+                jogador_atual = 2; // Troca para o jogador 2.
             }
         }
 
@@ -219,19 +233,22 @@ int main()
             scanf("%[^\n]", posicao);
             jogada = marcar(tabuleiro, jogador_atual, posicao);
             verificar_vencedor(tabuleiro, jogador_atual, &venceu);
-            if(venceu == 1){
+            if (venceu == 1)
+            {
                 printf("PAREBENS!\n");
                 printf("%s venceu a partida.", jogador_2);
-            terminar = 1;
-            }else if (jogada == 0) //Jogada foi falsa, invalida
+                terminar = 1;
+            }
+            else if (jogada == 0) // Jogada foi falsa, invalida
             {
                 system("cls || clean");
                 imprimir_tabuleiro(tabuleiro);
                 printf("\nJogada invalida!");
                 jogador_atual = 2;
-            }else
+            }
+            else
             {
-            jogador_atual = 1; // Troca para o jogador 2.
+                jogador_atual = 1; // Troca para o jogador 2.
             }
         }
     }
