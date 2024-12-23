@@ -169,12 +169,14 @@ int main()
     char jogador_2[50];
     char posicao[5];
     int venceu;
+    int qtd_jogadas;
     char tabuleiro[3][3] = {
         {' ', ' ', ' '},
         {' ', ' ', ' '},
         {' ', ' ', ' '}};
 
     venceu = 0;
+    qtd_jogadas = 0;
 
     system("cls || clean");
     printf("=-=-=-=-=-=-=-=-=-=-=\n");
@@ -222,10 +224,9 @@ int main()
             else
             {
                 jogador_atual = 2; // Troca para o jogador 2.
+                qtd_jogadas ++;
             }
-        }
-
-        if (jogador_atual == 2)
+        }else if (jogador_atual == 2)
         {
             printf("\n--Escolha a posicao--\n");
             printf(" %s:", jogador_2);
@@ -249,7 +250,15 @@ int main()
             else
             {
                 jogador_atual = 1; // Troca para o jogador 2.
+                qtd_jogadas ++;
             }
+        }
+
+        if(qtd_jogadas == 9){
+            system("cls || clean");
+            imprimir_tabuleiro(tabuleiro);
+            printf("\nEmpate!\n");
+            terminar = 1;
         }
     }
 }
